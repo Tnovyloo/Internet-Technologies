@@ -1,0 +1,27 @@
+// Import important packages
+const express = require('express');
+const mongoose = require('mongoose');
+const cors = require('cors');
+const port = 3000;
+
+// Set-up server.
+const app = express();
+app.use(cors());
+app.use(express.json());
+
+// Set-up mongoose
+mongoose.connect("mongodb://mongo:27017/tasks", { useNewUrlParser: true, useUnifiedTopology: true })
+  .then(() => console.log("Connected to mongoDB"))
+  .catch((error) => console.log(error));
+
+app.get('/', (req, res) => {
+  res.send('Hello World!');
+})
+
+app.listen(port, () => {
+  console.log(`Example app listening on port ${port}`);
+})
+
+app.get('/hello', (req, res) => {
+  res.send("helo")
+})
