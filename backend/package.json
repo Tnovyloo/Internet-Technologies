@@ -6,7 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node app.js",
-    "dev": "nodemon app.js"
+    "dev": "nodemon --legacy-watch --watch ./ app.js"
   },
   "author": "Tomasz Nowak",
   "license": "ISC",
@@ -17,5 +17,8 @@
   },
   "devDependencies": {
     "nodemon": "^2.0.15"
+  },
+  "nodemonConfig": {
+    "legacyWatch": true
   }
 }
