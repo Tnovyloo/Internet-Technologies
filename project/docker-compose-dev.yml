@@ -31,5 +31,23 @@ services:
   #   depends_on:
   #     - backend
 
+  frontend:
+    container_name: task-management-frontend
+    build:
+      context: ../frontend/task-management-frontend/
+      target: dev
+      dockerfile: frontend.Dockerfile
+    restart: always
+    command: yarn dev
+    environment:
+      - NODE_ENV=${NODE_ENV}
+      - WATCHPACK_POLLING=${WATCHPACK_POLLING}
+    volumes:
+      - ../frontend/task-management-frontend:/app
+      - /app/node_modules
+      - /app/.next
+    ports:
+      - "80:3000"
+
 volumes:
   mongo-data:
