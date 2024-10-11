@@ -23,14 +23,6 @@ services:
       - mongo
     command: npm run dev
 
-  # frontend:
-  #   build: ./frontend
-  #   container_name: frontend
-  #   ports:
-  #     - "3000:3000"
-  #   depends_on:
-  #     - backend
-
   frontend:
     container_name: task-management-frontend
     build:
