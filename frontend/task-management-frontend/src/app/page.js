@@ -1,9 +1,14 @@
 import Image from "next/image";
 import Card from "./components/card";
+import Head from "next/head";
 
 export default function Home() {
   return (
-    <div className="bg-neutralGray-300">
+    <div className="bg-neutralGray-300/50 min-h-[1200px]">
+      <Head>
+        <title>Menadżer zadań</title>
+        <meta property="og:title" content="Menadżer zadań na twoją miarę"/>
+      </Head>
       <div className="w-11/12 h-full">
         {/* Head text */}
         <div className={`w-full`}>
@@ -11,11 +16,14 @@ export default function Home() {
         </div>
       </div>
 
-      <div className={`w-11/12 grid overflow-auto grid-cols-1 md:grid-cols-4 mx-auto gap-4`}>
+      <div className={`w-11/12 grid overflow-auto grid-cols-1 md:grid-cols-4 mx-auto gap-4 skeleton-75`}>
 
         {/* Columns */}
         {/* TODO fetch it from backend and send proper card data to show it to user. */}
-        <Card/>
+        <Card title={`TODO`}/>
+        <Card title={`W trakcie`}/>
+        <Card title={`Review`}/>
+        <Card title={`Zakończone`}/>
 
       </div>
       

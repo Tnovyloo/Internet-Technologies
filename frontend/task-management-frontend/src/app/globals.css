@@ -2,3 +2,43 @@
 @tailwind components;
 @tailwind utilities;
 
+@keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(20%);
+    }
+  
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+} 
+
+.skeleton-25 {
+    animation: fadeInUp 0.25s;
+}
+  
+.skeleton-50 {
+    animation: fadeInUp 0.5s;
+}
+
+.skeleton-75 {
+    animation: fadeInUp 0.75s;
+}
+  
+.skeleton {
+    animation: fadeInUp 1s;
+}
+  
+.skeleton-200 {
+    animation: fadeInUp 2s;
+}
+  
+.skeleton-250 {
+    animation: fadeInUp 2.5s;
+}
+  
+.skeleton-300 {
+    animation: fadeInUp 3s;
+}
+
