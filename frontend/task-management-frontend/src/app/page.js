@@ -10,7 +10,20 @@ export default function Home() {
         <title>Menadżer zadań</title>
         <meta property="og:title" content="Menadżer zadań na twoją miarę"/>
       </Head>
-      <div className="w-11/12 h-full">
+
+      <div className="flex w-full flex-wrap">
+        <div className="flex-grow w-8 h-8 bg-accentColor-400 rounded-bl-[28px]"/>
+        <div className="flex-grow w-8 h-8 bg-accentColor-300"/>
+        <div className="flex-grow w-8 h-8 bg-accentColor-200"/>
+        <div className="flex-grow w-8 h-8 bg-accentColor-100"/> 
+        <div className="flex-grow w-8 h-8 bg-base-100"/>
+        <div className="flex-grow w-8 h-8 bg-base-200"/>
+        <div className="flex-grow w-8 h-8 bg-base"/>
+        <div className="flex-grow w-8 h-8 bg-base-300"/>
+        <div className="flex-grow w-8 h-8 bg-base-400 rounded-br-[28px]"/>
+      </div>
+
+      <div className="w-11/12 h-full mx-auto">
         {/* Head text */}
         <div className={`w-full`}>
           <p className={`p-8 text-[26px] md:text-[30px] text-black font-[500]`}>Strona główna</p>

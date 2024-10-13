@@ -11,7 +11,7 @@ export default function Card({children, data, title}) {
 
   return(
     <div className="">
-      <div className={`flex flex-row justify-between mb-4 w-10/12 mx-auto`}>
+      <div className={`flex flex-row justify-between mb-4 w-11/12 md:w-10/12 mx-auto`}>
         <p className={`text-[22px] md:text-[26px] text-black font-[500] text-left w-full`}>{title}</p>
         <div className={`my-auto`}>
           {/* <svg className={`stroke-gray-200`} width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -45,19 +45,22 @@ export default function Card({children, data, title}) {
 
         {/* Message */}
         <div className={`h-11/12 min-h-[100px] bg-neutralGray-200/10 mt-[15px] mx-[13px] rounded-[21px] mb-[1.5em] skeleton`}>
-          <p className={`text-[18px] md:text-[20px] w-11/12 mx-auto mt-[0.75em] mb-[0.75em]`}>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec bibendum congue risus at dignissim. Proin vitae massa dapibus, porttitor purus non, auctor nisl. In euismod,</p>
+          <p className={`text-[18px] text-gray/90 md:text-[20px] w-11/12 mx-auto mt-[0.75em] mb-[0.75em]`}>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec bibendum congue risus at dignissim. Proin vitae massa dapibus, porttitor purus non, auctor nisl. In euismod,</p>
         </div>
 
         {/* Footer of card */}
-        <div className={`mx-[13px] mb-[13px]`}>
-          <svg className={`stroke-gray-200`} width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M21 10H3M16 2V6M8 2V6M7.8 22H16.2C17.8802 22 18.7202 22 19.362 21.673C19.9265 21.3854 20.3854 20.9265 20.673 20.362C21 19.7202 21 18.8802 21 17.2V8.8C21 7.11984 21 6.27976 20.673 5.63803C20.3854 5.07354 19.9265 4.6146 19.362 4.32698C18.7202 4 17.8802 4 16.2 4H7.8C6.11984 4 5.27976 4 4.63803 4.32698C4.07354 4.6146 3.6146 5.07354 3.32698 5.63803C3 6.27976 3 7.11984 3 8.8V17.2C3 18.8802 3 19.7202 3.32698 20.362C3.6146 20.9265 4.07354 21.3854 4.63803 21.673C5.27976 22 6.11984 22 7.8 22Z" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-          </svg>
+        <div>
+          <div className={`mb-[20px] mx-[20px] flex flex-row gap-x-2`}>
+            <svg className={`stroke-gray-200/70`} width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M21 10H3M16 2V6M8 2V6M7.8 22H16.2C17.8802 22 18.7202 22 19.362 21.673C19.9265 21.3854 20.3854 20.9265 20.673 20.362C21 19.7202 21 18.8802 21 17.2V8.8C21 7.11984 21 6.27976 20.673 5.63803C20.3854 5.07354 19.9265 4.6146 19.362 4.32698C18.7202 4 17.8802 4 16.2 4H7.8C6.11984 4 5.27976 4 4.63803 4.32698C4.07354 4.6146 3.6146 5.07354 3.32698 5.63803C3 6.27976 3 7.11984 3 8.8V17.2C3 18.8802 3 19.7202 3.32698 20.362C3.6146 20.9265 4.07354 21.3854 4.63803 21.673C5.27976 22 6.11984 22 7.8 22Z" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+            </svg>
 
+            <p className="text-gray-200/80 font-[500] text-[16px] my-auto pt-[1px]">13.10.2024</p>
+
+          </div>
           {React.Children.toArray(children).map(
             (child) => child.type !== Icon ? (<div className="text-red-600">Other childs: {child}</div>) : console.log('Icon child')
           )}
-
         </div>
       </div>
     </div>
