@@ -1,7 +1,7 @@
 import React from "react"
 import Icon from "./icon"
 
-export default function Card({children, data, title}) {
+export default function Card({children, data, title, shadowClass}) {
   // Children of Card component only uses
 
   const icons = React.Children.toArray(children).filter(
@@ -12,7 +12,7 @@ export default function Card({children, data, title}) {
   return(
     <div className="">
       <div className={`flex flex-row justify-between mb-4 w-11/12 md:w-10/12 mx-auto`}>
-        <p className={`text-[22px] md:text-[26px] text-black font-[500] text-left w-full`}>{title}</p>
+        <p className={`text-[22px] md:text-[26px] text-black font-[500] text-left w-full select-none`}>{title}</p>
         <div className={`my-auto`}>
           {/* <svg className={`stroke-gray-200`} width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path d="M12 13C12.5523 13 13 12.5523 13 12C13 11.4477 12.5523 11 12 11C11.4477 11 11 11.4477 11 12C11 12.5523 11.4477 13 12 13Z" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
@@ -24,7 +24,7 @@ export default function Card({children, data, title}) {
         </div>
       </div>
 
-      <div className={`bg-white rounded-[34px] w-full flex flex-col justify-between`}>
+      <div className={`bg-white rounded-[34px] w-[95%] flex flex-col justify-between ${shadowClass} transition duration-200 shadow-md`}>
         {/* Content */}
 
         {/* Head of card with name tag */}
@@ -58,9 +58,9 @@ export default function Card({children, data, title}) {
             <p className="text-gray-200/80 font-[500] text-[16px] my-auto pt-[1px]">13.10.2024</p>
 
           </div>
-          {React.Children.toArray(children).map(
+          {/* {React.Children.toArray(children).map(
             (child) => child.type !== Icon ? (<div className="text-red-600">Other childs: {child}</div>) : console.log('Icon child')
-          )}
+          )} */}
         </div>
       </div>
     </div>
