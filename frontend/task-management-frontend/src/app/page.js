@@ -1,9 +1,28 @@
+"use client"
+
 import Image from "next/image";
 import Card from "./components/card";
 import Head from "next/head";
 import Icon from "./components/icon";
+import { useEffect, useState } from "react";
 
 export default function Home() {
+
+  const [Hello, setHello] = useState('')
+
+  useEffect(() => {
+    console.log('Hello')
+
+    setHello("yup")
+
+    console.log(Hello)
+  
+    return () => {
+      // second
+    }
+  }, [])
+  
+
   return (
     <div className="bg-neutralGray-300/50 min-h-[1200px]">
       <Head>
