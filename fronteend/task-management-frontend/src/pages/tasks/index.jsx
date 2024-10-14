@@ -3,8 +3,41 @@ import localFont from "next/font/local";
 import Head from "next/head";
 import Card from "@/components/card";
 import Icon from "@/components/icon";
+import { useEffect } from "react";
 
-export default function Home() {
+export const getServerSideProps = (async (context) => {
+  const { query } = context;
+  const { sessionKey } = query
+  console.log(sessionKey)
+
+  try {
+    const res = await fetch('http://backend:5000/tasks', { method: "GET", headers: {'x-session-key': sessionKey}})
+    const data = await res.json();
+    console.log(data)
+  
+    return {
+      props: {
+        data, // Pass the fetched data to the component as a prop
+      },
+    };
+  } catch (error) {
+    console.log(error)
+    return {
+      props: {
+        error: "Error occured while trying to fetch data."
+      }
+    }
+  }
+
+})
+
+export default function Home({ data }) {
+
+  useEffect(() => {
+    console.log(data)  
+  }, [])
+  
+
   return (
     <div className="bg-neutralGray-300/50 min-h-[1200px]">
       <Head>
