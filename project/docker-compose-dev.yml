@@ -26,7 +26,7 @@ services:
   frontend:
     container_name: task-management-frontend
     build:
-      context: ../frontend/task-management-frontend/
+      context: ../fronteend/task-management-frontend/
       target: dev
       dockerfile: frontend.Dockerfile
     restart: always
@@ -35,7 +35,7 @@ services:
       - NODE_ENV=${NODE_ENV}
       - WATCHPACK_POLLING=${WATCHPACK_POLLING}
     volumes:
-      - ../frontend/task-management-frontend:/app
+      - ../fronteend/task-management-frontend:/app
       - /app/node_modules
       - /app/.next
     ports:
