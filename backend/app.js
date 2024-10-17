@@ -29,16 +29,22 @@ app.post('/tasks', async (req, res) => {
   const sessionKey = req.headers['x-session-key']
   console.log(sessionKey, typeof(sessionKey))
 
+  const userName = req.headers['user-name']
+
   try {
     if (!sessionKey) {
-      return res.status(400).json({ message: 'Session key is required' });
+      return res.status(400).json({ message: 'Session key is required in Headers!' });
+    }
+
+    if (!userName) {
+      return res.status(400).json({ message: 'Username is required in Headers!'});
     }
     
     const newItem = new Item({
       label: req.body.label,
       sessionHash: sessionKey, // Attach session key here
       description: req.body.description,
-      user: req.body.user,
+      user: userName,
       status: req.body.status,
     });
 

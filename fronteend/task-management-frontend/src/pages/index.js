@@ -1,7 +1,7 @@
 import Image from "next/image";
 import localFont from "next/font/local";
 import Head from "next/head";
-import Card from "@/components/card";
+import Column from "@/components/column";
 import Icon from "@/components/icon";
 import { useRouter } from 'next/router';
 
