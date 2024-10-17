@@ -9,6 +9,8 @@ services:
       - "27017:27017"
     volumes:
       - mongo-data:/data/db
+    networks:
+      - backend
 
   backend:
     build: 
@@ -22,11 +24,14 @@ services:
     depends_on:
       - mongo
     command: npm run dev
+    networks:
+      - backend
 
+  # FRONTEEND DIRECTORY IS NEW APP WITH DEFAULT PAGES ROUTER. FRONTEND DIRECTORY IS AN NEXTJS WITH APP ROUTER THAT IS IN MY OPINION 'WEIRD' IN THE WAY HOW TO FETCH BACKEND DATA TO REACT CODE
   frontend:
     container_name: task-management-frontend
     build:
-      context: ../frontend/task-management-frontend/
+      context: ../fronteend/task-management-frontend/
       target: dev
       dockerfile: frontend.Dockerfile
     restart: always
@@ -35,11 +40,17 @@ services:
       - NODE_ENV=${NODE_ENV}
       - WATCHPACK_POLLING=${WATCHPACK_POLLING}
     volumes:
-      - ../frontend/task-management-frontend:/app
+      - ../fronteend/task-management-frontend:/app
       - /app/node_modules
       - /app/.next
     ports:
       - "80:3000"
+    networks:
+      - backend
 
 volumes:
   mongo-data:
+
+networks:
+  backend:
+    driver: bridge
