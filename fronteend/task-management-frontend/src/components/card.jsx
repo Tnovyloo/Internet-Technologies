@@ -1,7 +1,7 @@
 import React from "react";
 
 
-export default function Card({shadowClass, data}) {
+export default function Card({shadowClass, cardData}) {
   return (
     <div className={`bg-white rounded-[34px] w-[95%] flex flex-col justify-between ${shadowClass} transition duration-200 shadow-md`}>
         {/* Content */}
@@ -9,7 +9,7 @@ export default function Card({shadowClass, data}) {
         {/* Head of card with name tag */}
         <div className={`flex flex-row mt-[20px] mx-[20px] justify-between skeleton-50`}>
           <div className={`rounded-[14px] bg-accentColor-100 border-accentColor-200 border-[2px]`}>
-            <p className={`px-[15px] py-[3px] text-accentColor-400`}>Hello</p>
+            <p className={`px-[15px] py-[3px] text-accentColor-400`}>{ cardData.label && ( cardData.label )}</p>
           </div>
           <div>
           </div>

@@ -3,16 +3,29 @@ import localFont from "next/font/local";
 import Head from "next/head";
 import Column from "@/components/column";
 import Icon from "@/components/icon";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 export const getServerSideProps = (async (context) => {
+
+  const aggregateByStatus = (data) => {
+    return data.reduce((acc, item) => {
+      const { status } = item;
+      if (!acc[status]) {
+        acc[status] = [];
+      }
+      acc[status].push(item);
+      return acc;
+    }, {});
+  };
+
   const { query } = context;
   const { sessionKey } = query
   console.log(sessionKey)
 
   try {
     const res = await fetch('http://backend:5000/tasks', { method: "GET", headers: {'x-session-key': sessionKey}})
-    const data = await res.json();
+    let data = await res.json();
+    data = aggregateByStatus(data)
     console.log(data)
   
     return {
@@ -32,9 +45,11 @@ export const getServerSideProps = (async (context) => {
 })
 
 export default function Home({ data }) {
+  const [tasks, setTasks] = useState(data)
 
   useEffect(() => {
-    console.log(data)  
+    console.log(tasks.todo)
+    
   }, [])
   
 
@@ -68,12 +83,11 @@ export default function Home({ data }) {
 
         {/* Columns */}
         {/* TODO fetch it from backend and send proper card data to show it to user. */}
-        <Column title={`TODO`} shadowClass={'geometric-shadow-red'}>
+        <Column title={`TODO`} data={tasks.todo} shadowClass={'geometric-shadow-red'}>
           <Icon>
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path d="M12 13V7M9 10H15M19 21V7.8C19 6.11984 19 5.27976 18.673 4.63803C18.3854 4.07354 17.9265 3.6146 17.362 3.32698C16.7202 3 15.8802 3 14.2 3H9.8C8.11984 3 7.27976 3 6.63803 3.32698C6.07354 3.6146 5.6146 4.07354 5.32698 4.63803C5 5.27976 5 6.11984 5 7.8V21L12 17L19 21Z" stroke="black" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
             </svg>
-
           </Icon>
         </Column>
 
