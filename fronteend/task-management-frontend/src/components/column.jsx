@@ -32,13 +32,15 @@ export default function Column({children, data, title, shadowClass}) {
         </div>
       </div>
       
-      { data && data !== undefined ? (
-        data.map((cardData) => {
-          <Card shadowClass={shadowClass} data={cardData}/>
-        })
-      ) : (
-        <div>XD</div>
-      ) }
+      <div className="bg-black flex flex-col gap-y-4">
+        { data && data !== undefined ? (
+            data.map((cardData, index) => {
+              return (<Card shadowClass={shadowClass} cardData={cardData} key={index}/>)
+            })
+        ) : (
+          <div>xD</div>
+        ) }
+      </div>
 
     </div>
   )
