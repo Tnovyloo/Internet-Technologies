@@ -1,6 +1,8 @@
 import React from "react"
 import Icon from "./icon"
 import Card from "./card"
+import { useEffect, useState } from "react"
+
 
 export default function Column({children, data, title, shadowClass}) {
   // Children of Card component only uses
@@ -9,6 +11,11 @@ export default function Column({children, data, title, shadowClass}) {
     (child) => child.type === Icon // Get all Icon compononents
   )
 
+  useEffect(() => {
+    console.log(`${title} Column data: `, data)
+
+  }, [])
+  
 
   return(
     <div className="">
@@ -24,8 +31,17 @@ export default function Column({children, data, title, shadowClass}) {
           {icons}
         </div>
       </div>
+      
+      <div className="bg-black flex flex-col gap-y-4">
+        { data && data !== undefined ? (
+            data.map((cardData, index) => {
+              return (<Card shadowClass={shadowClass} cardData={cardData} key={index}/>)
+            })
+        ) : (
+          <div>xD</div>
+        ) }
+      </div>
 
-      <Card shadowClass={shadowClass} data={{message: "hello"}}></Card>
     </div>
   )
 }
