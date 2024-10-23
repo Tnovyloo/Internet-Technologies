@@ -1,12 +1,13 @@
 import React from "react";
 import { useEffect, useState } from "react";
 
-export default function Card({shadowClass, cardData, id}) {
+export default function Card({shadowClass, cardData, id, dragHandleProps}) {
   useEffect(() => {
+    console.log("helllo", dragHandleProps)
   }, [])
 
   return (
-    <div className={`bg-white rounded-[34px] w-[95%] flex flex-col justify-between ${shadowClass} transition duration-200 shadow-md mx-auto`} id={`${id}`}>
+    <div className={`bg-white rounded-[34px] w-[95%] flex flex-col justify-between ${shadowClass} transition duration-200 shadow-md mx-auto`} id={`${id}`} {...dragHandleProps}>
         {/* Content */}
 
         {/* Head of card with name tag */}

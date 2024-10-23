@@ -4,7 +4,7 @@ import Head from "next/head";
 import Column from "@/components/column";
 import Icon from "@/components/icon";
 import { useEffect, useState } from "react";
-import { DragDropContext } from "react-beautiful-dnd";
+import { DragDropContext, Droppable } from "react-beautiful-dnd";
 
 export const getServerSideProps = (async (context) => {
 
@@ -52,7 +52,7 @@ export default function Home({ data }) {
     // console.log(tasks.todo)
   }, [])
 
-  const onDragEnd = (result) => {
+  const onDragEnd = (result, columns, setColumns) => {
     console.log("onDragEnd")
     return;
   }
@@ -84,18 +84,48 @@ export default function Home({ data }) {
         </div>
       </div>
 
-      <DragDropContext onDragEnd={onDragEnd}>
+      <DragDropContext onDragEnd={(result) => onDragEnd(result, columns, setColumns)}>
       
         <div className={`w-11/12 grid overflow-auto grid-cols-1 md:grid-cols-2 xl:grid-cols-4 mx-auto gap-x-2 gap-y-5 skeleton-75 pb-10`}>
           {/* Columns */}
           {/* TODO fetch it from backend and send proper card data to show it to user. */}
-          <Column title={`TODO`} data={tasks?.todo && tasks?.todo} shadowClass={'geometric-shadow-red'}>
+          <Droppable droppableId="todo" key="todo">
+          {(provided, snapshot) => {
+              return (
+                <div
+                  {...provided.droppableProps}
+                  ref={provided.innerRef}
+                  style={{
+                    background: snapshot.isDraggingOver
+                      ? "lightblue"
+                      : "lightgrey",
+                    padding: 4,
+                    // width: 250,
+                    // minHeight: 500
+                  }}
+                >
+                  <Column title={`TODO`} data={tasks?.todo && tasks?.todo} shadowClass={'geometric-shadow-red'}>
+                    <Icon>
+                      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M12 13V7M9 10H15M19 21V7.8C19 6.11984 19 5.27976 18.673 4.63803C18.3854 4.07354 17.9265 3.6146 17.362 3.32698C16.7202 3 15.8802 3 14.2 3H9.8C8.11984 3 7.27976 3 6.63803 3.32698C6.07354 3.6146 5.6146 4.07354 5.32698 4.63803C5 5.27976 5 6.11984 5 7.8V21L12 17L19 21Z" stroke="black" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                      </svg>
+                    </Icon>
+                  </Column>
+
+                  {provided.placeholder}
+                </div>
+            );
+          }}
+
+          </Droppable>
+
+          {/* <Column title={`TODO`} data={tasks?.todo && tasks?.todo} shadowClass={'geometric-shadow-red'}>
             <Icon>
               <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M12 13V7M9 10H15M19 21V7.8C19 6.11984 19 5.27976 18.673 4.63803C18.3854 4.07354 17.9265 3.6146 17.362 3.32698C16.7202 3 15.8802 3 14.2 3H9.8C8.11984 3 7.27976 3 6.63803 3.32698C6.07354 3.6146 5.6146 4.07354 5.32698 4.63803C5 5.27976 5 6.11984 5 7.8V21L12 17L19 21Z" stroke="black" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
               </svg>
             </Icon>
-          </Column>
+          </Column> */}
 
 
           <Column title={`W trakcie`} data={tasks?.in_work && tasks?.in_work} shadowClass={`geometric-shadow-gray`}>
