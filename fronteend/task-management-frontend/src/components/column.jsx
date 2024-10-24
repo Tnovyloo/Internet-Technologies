@@ -2,6 +2,7 @@ import React from "react"
 import Icon from "./icon"
 import Card from "./card"
 import { useEffect, useState } from "react"
+import { Draggable } from "react-beautiful-dnd"
 
 
 export default function Column({children, data, title, shadowClass}) {
@@ -33,10 +34,25 @@ export default function Column({children, data, title, shadowClass}) {
       </div>
       
       <div className="bg-black flex flex-col gap-y-4">
+
         { data && data !== undefined ? (
-            data.map((cardData, index) => {
-              return (<Card shadowClass={shadowClass} cardData={cardData} key={index}/>)
-            })
+            // data.map((cardData, index) => {
+            //   return (<Card shadowClass={shadowClass} cardData={cardData} key={index}/>)
+            // })
+          data.map((cardData, index) => {
+            return (
+              <Draggable key={cardData.id} draggableId={`${cardData.id}`} index={index}>
+                {(provided, snapshot) => {
+                  return (
+                    <div ref={provided.innerRef} {...provided.draggableProps} {...provided.dragHandleProps}>
+                      <Card shadowClass={shadowClass} cardData={cardData} />
+                    </div>
+                  )
+                }}
+              </Draggable>
+            )
+          })
+
         ) : (
           <div>xD</div>
         ) }
