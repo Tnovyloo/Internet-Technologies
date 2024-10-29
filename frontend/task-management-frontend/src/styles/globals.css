@@ -2,6 +2,12 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer base {
+  html {
+      font-family: 'Poppins';
+  }
+}
+
 @keyframes fadeInUp {
     from {
       opacity: 0;
@@ -60,4 +66,14 @@
 .shadow-around {
     /*box-shadow: 5px 5px rgba(0, 98, 90, 0.4), 10px 10px rgba(0, 98, 90, 0.3), 15px 15px rgba(0, 98, 90, 0.2), 20px 20px rgba(0, 98, 90, 0.1), 25px 25px rgba(0, 98, 90, 0.05);*/
     box-shadow: 0 0 10px rgba(0,0,0,0.2);
+}
+
+.form-input {
+    background-color: white;
+    border-radius: 28px;
+    width: 92%;
+    height: 42px;
+    margin-left: auto;
+    margin-right: auto;
+
 }
