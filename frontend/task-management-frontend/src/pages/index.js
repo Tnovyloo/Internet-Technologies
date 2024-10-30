@@ -48,9 +48,15 @@ export default function Home() {
         <div className="w-11/12 lg:w-6/12 mx-auto flex flex-col gap-3">
           <p className={`pt-6 pb-8 text-[26px] md:text-[30px] text-black font-[500] text-center`}>Zespołowy Task Manager</p>
           <form onSubmit={handleRedirect} className="w-full h-full flex flex-col gap-3 mx-auto form-div">
-            <input type="text" className="form-input" required={true} placeholder="username" name="username"/>
-            <input type="text" className="form-input" required={true} placeholder="unique code" name="sessionKey"/>
-            <button type="submit" className="w-1/2 py-2 mx-auto border-black border-2 bg-slate-400">Go to session</button>
+            <div className="skeleton">
+              <label htmlFor="username" className="text-[18px]">Nazwa użytkownika</label>
+              <input type="text" className="" required={true} placeholder="username" name="username"/>
+            </div>
+            <div className="skeleton">
+              <label htmlFor="sessionKey" className="text-[18px]">Klucz sesji</label>
+              <input type="text" className="" required={true} placeholder="Klucz sesji" name="sessionKey"/>
+            </div>
+            <button type="submit" className="skeleton-200">Przejdź do sesji</button>
           </form>
         </div>
       </div>

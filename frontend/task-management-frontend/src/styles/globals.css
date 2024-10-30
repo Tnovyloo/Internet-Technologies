@@ -2,6 +2,37 @@
 @tailwind components;
 @tailwind utilities;
 
+/* styles.css */
+
+:root {
+    --color-white: #FFFFFF;
+    --color-base: #D4F49C;
+    --color-base-400: #9CCC4A;
+    --color-base-300: #C1ED76;
+    --color-base-200: #E5FAC3;
+    --color-base-100: #F5FEE7;
+
+    --color-gray: #484844;
+    --color-gray-400: #18180E;
+    --color-gray-300: #11110F;
+    --color-gray-200: #7D7D76;
+    --color-gray-100: #AFAFA5;
+
+    --color-neutralGray: #FBFAFA;
+    --color-neutralGray-300: #ede8e8;
+    --color-neutralGray-200: #A59E9E;
+    --color-neutralGray-100: #CDCACA;
+
+    --color-accentColor: #DC5A50;
+    --color-accentColor-400: #DC5A50;
+    --color-accentColor-300: #FFAAA3;
+    --color-accentColor-200: #FFCBC7;
+    --color-accentColor-100: #FFEAE8;
+
+    --color-background: #FBFAFA;
+}
+
+
 @layer base {
   html {
       font-family: 'Poppins';
@@ -68,12 +99,52 @@
     box-shadow: 0 0 10px rgba(0,0,0,0.2);
 }
 
-.form-input {
+.form-div {
+    gap: 1.25rem /* 12px */;
+}
+
+.form-div label {
+    color: black;
+    font-weight: 400;
+    padding-left: 0.75rem;
+}
+
+.form-div input {
     background-color: white;
     border-radius: 28px;
-    width: 92%;
-    height: 42px;
+    width: 100%;
+    height: 45px;
+    padding-left: 1.25rem;
+    margin-top: 0.25rem;
     margin-left: auto;
     margin-right: auto;
+    outline: none;
+    transition: box-shadow 0.3s ease;
+}
 
+.form-div input::placeholder {
+    color: rgba(36, 36, 36, 0.5);
+}
+
+.form-div input:focus {
+    box-shadow: 0 0 0 3px hsla(220, 100%, 50%, 80%);
+    outline: none;
+}
+
+.form-div button {
+    width: 50%;
+    margin-top: 0.75rem;
+    margin-left: auto;
+    margin-right: auto;
+    background-color: var(--color-base-100);
+    border: 3px solid var(--color-base-400);
+    height: 52px;
+    border-radius: 28px;
+    box-shadow: 5px 5px 0px 0px var(--color-base);
+    transition: box-shadow 0.1s ease;
+    color: #42571e;
+}
+
+.form-div button:focus {
+    box-shadow: none;
 }
