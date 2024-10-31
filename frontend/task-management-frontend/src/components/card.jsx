@@ -33,9 +33,9 @@ export default function Card({shadowClass, cardData, id, dragHandleProps}) {
         </div>
 
         {/* Footer of card */}
-        <div className="flex flex-col lg:flex-row justify-between">
+        <div className="flex flex-col lg:flex-row lg:justify-between justify-start">
           <div className={`mb-[20px] mx-[20px] flex flex-row gap-x-2`}>
-            <svg className={`stroke-gray-200/70`} width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <svg className={`stroke-gray-200/70 my-auto`} width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path d="M21 10H3M16 2V6M8 2V6M7.8 22H16.2C17.8802 22 18.7202 22 19.362 21.673C19.9265 21.3854 20.3854 20.9265 20.673 20.362C21 19.7202 21 18.8802 21 17.2V8.8C21 7.11984 21 6.27976 20.673 5.63803C20.3854 5.07354 19.9265 4.6146 19.362 4.32698C18.7202 4 17.8802 4 16.2 4H7.8C6.11984 4 5.27976 4 4.63803 4.32698C4.07354 4.6146 3.6146 5.07354 3.32698 5.63803C3 6.27976 3 7.11984 3 8.8V17.2C3 18.8802 3 19.7202 3.32698 20.362C3.6146 20.9265 4.07354 21.3854 4.63803 21.673C5.27976 22 6.11984 22 7.8 22Z" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
             </svg>
 
@@ -43,9 +43,9 @@ export default function Card({shadowClass, cardData, id, dragHandleProps}) {
 
           </div>
 
-          <div className={`mb-[20px] mx-[20px] flex flex-row gap-x-2`}>
+          <div className={`mb-[20px] mx-[20px] flex flex-row-reverse lg:flex-row gap-x-2`}>
             <p className="text-gray-200/80 font-[400] text-[14px] lg:text-[16px] my-auto pt-[1px]">{ cardData?.user ? (cardData?.user.charAt(0).toUpperCase() + cardData?.user.slice(1)) : ('Brak') }</p>
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="stroke-gray-200/80">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="stroke-gray-200/80 my-auto">
               <path d="M12 15C8.8299 15 6.01077 16.5306 4.21597 18.906C3.82968 19.4172 3.63653 19.6728 3.64285 20.0183C3.64773 20.2852 3.81533 20.6219 4.02534 20.7867C4.29716 21 4.67384 21 5.4272 21H18.5727C19.3261 21 19.7028 21 19.9746 20.7867C20.1846 20.6219 20.3522 20.2852 20.3571 20.0183C20.3634 19.6728 20.1703 19.4172 19.784 18.906C17.9892 16.5306 15.17 15 12 15Z" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
               <path d="M12 12C14.4853 12 16.5 9.98528 16.5 7.5C16.5 5.01472 14.4853 3 12 3C9.51469 3 7.49997 5.01472 7.49997 7.5C7.49997 9.98528 9.51469 12 12 12Z" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
             </svg>
