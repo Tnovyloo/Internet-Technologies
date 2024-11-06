@@ -6,6 +6,7 @@ import ColumnHeader from "@/components/columnHeader";
 import Icon from "@/components/icon";
 import { useEffect, useState } from "react";
 import { DragDropContext, Droppable } from "react-beautiful-dnd";
+import axios from "axios";
 
 export const getServerSideProps = (async (context) => {
 
@@ -16,6 +17,9 @@ export const getServerSideProps = (async (context) => {
         acc[status] = [];
       }
       acc[status].push(item);
+
+      // Sort items
+      acc[status].sort((a, b) => (a.columnIndex || 0) - (b.columnIndex || 0));
       return acc;
     }, {});
   };
@@ -84,6 +88,9 @@ export default function Home({ data }) {
       const destItems = [...(destColumn?.items || [])];
       const [removed] = sourceItems.splice(source.index, 1);
 
+      const movedItemId = result.draggableId
+      const movedItemColumnDestination = destination.droppableId
+
       destItems.splice(destination.index, 0, removed);
       setColumns({
         ...columns,
@@ -96,6 +103,18 @@ export default function Home({ data }) {
           items: destItems
         }
       });
+
+      console.log(result, movedItemId)
+      try {
+        axios.put(`localhost:5000/tasks/${movedItemID}`, data={
+          columnIndex: destination.index,
+          status: destination.droppableId
+        });
+        console.log("Put request worked fine")
+      } catch (error) {
+        console.log(error)
+      }
+
     } else {
       const column = columns[source.droppableId];
       const copiedItems = [...column.items];
