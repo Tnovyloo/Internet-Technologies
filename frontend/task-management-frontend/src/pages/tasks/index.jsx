@@ -72,9 +72,26 @@ export default function Home({ data }) {
     }
   });
 
+  const [headersState, setHeadersState] = useState({
+    'x-session-key': '',
+    'user-name': ''
+  })
+
   useEffect(() => {
-    console.log("Lets render!")
+    console.log("Rendering items")
     setIsReady(true);
+
+    // Set State with headers.
+    const params = new URLSearchParams(window.location.search);
+    const usernameParam = params.get('username');
+    const sessionKeyParam = params.get('sessionKey');
+    console.log(usernameParam, sessionKeyParam)
+    setHeadersState(headersState => ({
+      ...headersState,
+      'x-session-key': sessionKeyParam || '',
+      'user-name': usernameParam || ''
+    }))
+
   }, [])
 
   const onDragEnd = (result, columns, setColumns) => {
@@ -106,13 +123,17 @@ export default function Home({ data }) {
 
       console.log(result, movedItemId)
       try {
-        axios.put(`localhost:5000/tasks/${movedItemID}`, data={
-          columnIndex: destination.index,
-          status: destination.droppableId
-        });
+        console.log(headersState)
+        axios.put(`http://localhost:5000/tasks/${movedItemId}`, 
+          data={
+            columnIndex: destination.index,
+            status: destination.droppableId
+          },
+          { headers: headersState}
+        );
         console.log("Put request worked fine")
       } catch (error) {
-        console.log(error)
+        console.error(error)
       }
 
     } else {
