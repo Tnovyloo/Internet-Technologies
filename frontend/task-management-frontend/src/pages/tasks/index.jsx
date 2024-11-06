@@ -94,6 +94,7 @@ export default function Home({ data }) {
 
   }, [])
 
+  // TODO, on drag end reorder all items in column, because now only one item is updated on backend. a column can contain two elements with the same columnIndex (orderIndex)
   const onDragEnd = (result, columns, setColumns) => {
     if (!result.destination) return;
     const { source, destination } = result;
@@ -106,7 +107,6 @@ export default function Home({ data }) {
       const [removed] = sourceItems.splice(source.index, 1);
 
       const movedItemId = result.draggableId
-      const movedItemColumnDestination = destination.droppableId
 
       destItems.splice(destination.index, 0, removed);
       setColumns({
@@ -122,6 +122,7 @@ export default function Home({ data }) {
       });
 
       console.log(result, movedItemId)
+      // Send data to backend
       try {
         console.log(headersState)
         axios.put(`http://localhost:5000/tasks/${movedItemId}`, 
@@ -148,6 +149,22 @@ export default function Home({ data }) {
           items: copiedItems
         }
       });
+
+      // Send data to backend
+      const movedItemId = result.draggableId
+
+      try {
+        console.log(headersState)
+        axios.put(`http://localhost:5000/tasks/${movedItemId}`, 
+          data={
+            columnIndex: destination.index,
+          },
+          { headers: headersState}
+        );
+        console.log("Put request worked fine")
+      } catch (error) {
+        console.error(error)
+      }
     }
   };
   

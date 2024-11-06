@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 
 export default function Card({shadowClass, cardData, id, dragHandleProps}) {
   useEffect(() => {
-    console.log("helllo", dragHandleProps)
+    console.log(dragHandleProps)
   }, [])
 
   return (
