@@ -46,6 +46,7 @@ app.post('/tasks', async (req, res) => {
       description: req.body.description,
       user: userName,
       status: req.body.status,
+      columnIndex: req.body.columnIndex
     });
 
     const savedItem = await newItem.save();
@@ -87,6 +88,38 @@ app.get('/tasks', async (req, res) => {
   }
 });
 
+app.put('/tasks/:id', async (req, res) => {
+  try {
+    const sessionKey = req.headers['x-session-key'];
+    if (!sessionKey) {
+      return res.status(400).json({ message: 'Session key is required'});
+    }
+    
+    console.log(req.params.id)
+    const itemId = req.params.id;
+    // // Find all items
+    // const items = await Item.find({ sessionStorage: sessionKey })
+    // // Find one item from items
+    // const item = items.find(i => i.id.toString() === req.params.id)
+
+    const item = await Item.findOneAndUpdate(
+      { id: itemId, sessionStorage: sessionKey }, // Match by ID and session key
+      { $set: req.body },                         // Update fields with data from request body
+      { new: true }                                 // Return the updated document
+    );
+    
+    if (item) {
+      res.json(item);
+    } else {
+      res.status(404).json({ message: 'Cannot find item.' })
+    }
+    console.log(item);
+
+  } catch (error) {
+    console.error('Error fetching items:', error);
+    res.status(500).json({ message: 'Internal server error' });
+  }
+})
 
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`);

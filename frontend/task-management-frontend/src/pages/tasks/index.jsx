@@ -6,6 +6,7 @@ import ColumnHeader from "@/components/columnHeader";
 import Icon from "@/components/icon";
 import { useEffect, useState } from "react";
 import { DragDropContext, Droppable } from "react-beautiful-dnd";
+import axios from "axios";
 
 export const getServerSideProps = (async (context) => {
 
@@ -16,6 +17,9 @@ export const getServerSideProps = (async (context) => {
         acc[status] = [];
       }
       acc[status].push(item);
+
+      // Sort items
+      acc[status].sort((a, b) => (a.columnIndex || 0) - (b.columnIndex || 0));
       return acc;
     }, {});
   };
@@ -68,11 +72,29 @@ export default function Home({ data }) {
     }
   });
 
+  const [headersState, setHeadersState] = useState({
+    'x-session-key': '',
+    'user-name': ''
+  })
+
   useEffect(() => {
-    console.log("Lets render!")
+    console.log("Rendering items")
     setIsReady(true);
+
+    // Set State with headers.
+    const params = new URLSearchParams(window.location.search);
+    const usernameParam = params.get('username');
+    const sessionKeyParam = params.get('sessionKey');
+    console.log(usernameParam, sessionKeyParam)
+    setHeadersState(headersState => ({
+      ...headersState,
+      'x-session-key': sessionKeyParam || '',
+      'user-name': usernameParam || ''
+    }))
+
   }, [])
 
+  // TODO, on drag end reorder all items in column, because now only one item is updated on backend. a column can contain two elements with the same columnIndex (orderIndex)
   const onDragEnd = (result, columns, setColumns) => {
     if (!result.destination) return;
     const { source, destination } = result;
@@ -83,6 +105,8 @@ export default function Home({ data }) {
       const sourceItems = [...(sourceColumn?.items || [])];
       const destItems = [...(destColumn?.items || [])];
       const [removed] = sourceItems.splice(source.index, 1);
+
+      const movedItemId = result.draggableId
 
       destItems.splice(destination.index, 0, removed);
       setColumns({
@@ -96,6 +120,23 @@ export default function Home({ data }) {
           items: destItems
         }
       });
+
+      console.log(result, movedItemId)
+      // Send data to backend
+      try {
+        console.log(headersState)
+        axios.put(`http://localhost:5000/tasks/${movedItemId}`, 
+          data={
+            columnIndex: destination.index,
+            status: destination.droppableId
+          },
+          { headers: headersState}
+        );
+        console.log("Put request worked fine")
+      } catch (error) {
+        console.error(error)
+      }
+
     } else {
       const column = columns[source.droppableId];
       const copiedItems = [...column.items];
@@ -108,6 +149,22 @@ export default function Home({ data }) {
           items: copiedItems
         }
       });
+
+      // Send data to backend
+      const movedItemId = result.draggableId
+
+      try {
+        console.log(headersState)
+        axios.put(`http://localhost:5000/tasks/${movedItemId}`, 
+          data={
+            columnIndex: destination.index,
+          },
+          { headers: headersState}
+        );
+        console.log("Put request worked fine")
+      } catch (error) {
+        console.error(error)
+      }
     }
   };
   

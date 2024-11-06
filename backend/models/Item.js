@@ -20,7 +20,8 @@ const ItemSchema = new mongoose.Schema({
     enum: ['todo', 'work-in-progress', 'in-review', 'ended'],  // Allowed values
     required: [true, "status (of task) is required"]
     // default: 'todo'  // Default value
-  }
+  },
+  columnIndex: { type: Number, unique: false, required: [true, "columnIndex - Index of item in column is required"]}
 })
 
 // Pre-save hook to auto-increment the `id` field
