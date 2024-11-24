@@ -17,7 +17,7 @@ const ItemSchema = new mongoose.Schema({
   id: { type: Number, unique: true }, // Ensure `id` is unique and uses a number type for auto-increment
   status: { 
     type: String, 
-    enum: ['todo', 'work-in-progress', 'in-review', 'ended'],  // Allowed values
+    enum: ['todo', 'inProgress', 'review', 'ended'],  // Allowed values
     required: [true, "status (of task) is required"]
     // default: 'todo'  // Default value
   },
