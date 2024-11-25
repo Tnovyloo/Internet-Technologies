@@ -222,6 +222,22 @@ export default function Home({ data }) {
       console.error('Error adding task:', error.response?.data || error.message);
     }
   };
+
+  const handleRemoveCard = async (e, cardId) => {
+    console.log("hello", cardId)
+    try {
+      if (!cardId) {
+        console.log("error")  
+        return
+      }
+      const response = await axios.delete(`http://localhost:5000/tasks/${cardId}`, { headers: headersState })
+      console.log(response)
+      reloadData();
+    } catch (error) {
+      console.log(error)
+    }
+
+  }
   
   return (
     <div className="bg-neutralGray-300/50 min-h-[1200px]">
@@ -325,7 +341,7 @@ export default function Home({ data }) {
                       className={`${ snapshot.isDraggingOver && "bg-slate-200"} transition duration-200 rounded-[28px]`}
                     >
 
-                      <Column title={`TODO`} data={columns.todo.items && columns.todo.items} shadowClass={'geometric-shadow-red'}>
+                      <Column title={`TODO`} data={columns.todo.items && columns.todo.items} shadowClass={'geometric-shadow-red'} onClick={handleRemoveCard}>
                         <Icon>
                           <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M12 13V7M9 10H15M19 21V7.8C19 6.11984 19 5.27976 18.673 4.63803C18.3854 4.07354 17.9265 3.6146 17.362 3.32698C16.7202 3 15.8802 3 14.2 3H9.8C8.11984 3 7.27976 3 6.63803 3.32698C6.07354 3.6146 5.6146 4.07354 5.32698 4.63803C5 5.27976 5 6.11984 5 7.8V21L12 17L19 21Z" stroke="black" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
@@ -358,7 +374,7 @@ export default function Home({ data }) {
                       ref={provided.innerRef}
                       className={`${ snapshot.isDraggingOver && "bg-slate-200"} transition duration-200 rounded-[28px]`}
                     >
-                      <Column title={`W trakcie`} data={columns?.inProgress.items && columns?.inProgress.items} shadowClass={`geometric-shadow-gray`}>
+                      <Column title={`W trakcie`} data={columns?.inProgress.items && columns?.inProgress.items} shadowClass={`geometric-shadow-gray`} onClick={handleRemoveCard}>
                         
                       </Column>
 
@@ -386,7 +402,7 @@ export default function Home({ data }) {
                       ref={provided.innerRef}
                       className={`${ snapshot.isDraggingOver && "bg-slate-200"} transition duration-200 rounded-[28px]`}
                     >
-                      <Column title={`Review`} data={columns?.review.items && columns?.review.items} shadowClass={`geometric-shadow-gray`}>
+                      <Column title={`Review`} data={columns?.review.items && columns?.review.items} shadowClass={`geometric-shadow-gray`} onClick={handleRemoveCard}>
 
                       </Column>
 
@@ -415,7 +431,7 @@ export default function Home({ data }) {
                       ref={provided.innerRef}
                       className={`${ snapshot.isDraggingOver && "bg-slate-200"} transition duration-200 rounded-[28px]`}
                     >
-                      <Column title={`Zakończone`} data={columns?.ended.items && columns?.ended.items} shadowClass={`geometric-shadow-green`}>
+                      <Column title={`Zakończone`} data={columns?.ended.items && columns?.ended.items} shadowClass={`geometric-shadow-green`} onClick={handleRemoveCard}>
                         
                         <div key={'div'}>
                           Helllllo
