@@ -5,7 +5,7 @@ import { useEffect, useState } from "react"
 import { Draggable } from "react-beautiful-dnd"
 
 
-export default function Column({children, data, title, shadowClass}) {
+export default function Column({children, data, title, shadowClass, onClick}) {
   // Children of Card component only uses
 
   const icons = React.Children.toArray(children).filter(
@@ -14,7 +14,6 @@ export default function Column({children, data, title, shadowClass}) {
 
   useEffect(() => {
     console.log(`${title} Column data: `, data)
-
   }, [])
   
 
@@ -31,7 +30,7 @@ export default function Column({children, data, title, shadowClass}) {
                 {(provided, snapshot) => {
                   return (
                     <div ref={provided.innerRef} {...provided.draggableProps} {...provided.dragHandleProps}>
-                      <Card shadowClass={shadowClass} cardData={cardData} />
+                      <Card shadowClass={shadowClass} cardData={cardData} onClick={onClick}/>
                     </div>
                   )
                 }}

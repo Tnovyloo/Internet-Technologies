@@ -1,10 +1,29 @@
 import React from "react";
 import { useEffect, useState } from "react";
 
-export default function Card({shadowClass, cardData, id, dragHandleProps}) {
+export default function Card({shadowClass, cardData, id, dragHandleProps, onClick}) {
+  const [cardId, setCardId] = useState("")
+  const [cardPanel, setCardPanel] = useState(false)
+
   useEffect(() => {
-    console.log(dragHandleProps)
+    setCardId(cardData?._id);
+    console.log(cardId, cardData?._id)
   }, [])
+
+  const handleShowCardPanel = () => {
+    setCardPanel(!cardPanel)
+  }
+
+  function toggleMenu() {
+    const menuPanel = document.getElementById('menuPanel');
+    if (menuPanel.classList.contains('show')) {
+      menuPanel.classList.remove('show');
+      setTimeout(() => menuPanel.classList.add('hidden'), 300); // Wait for animation to finish before hiding
+    } else {
+      menuPanel.classList.remove('hidden');
+      setTimeout(() => menuPanel.classList.add('show'), 10); // Add delay to trigger the transition
+    }
+  }
 
   return (
     <div className={`bg-white rounded-[34px] w-[95%] flex flex-col justify-between ${shadowClass} transition duration-200 shadow-md mx-auto`} id={`${id}`} {...dragHandleProps}>
@@ -18,12 +37,19 @@ export default function Card({shadowClass, cardData, id, dragHandleProps}) {
           </div>
           <div>
           </div>
-          <div className={`my-auto mr-2`}>
-            <svg className={`stroke-gray-200`} width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <div className={`my-auto mr-2 relative cursor-pointer`}>
+            <svg className={`stroke-gray-200`} width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" onClick={handleShowCardPanel}>
               <path d="M12 13C12.5523 13 13 12.5523 13 12C13 11.4477 12.5523 11 12 11C11.4477 11 11 11.4477 11 12C11 12.5523 11.4477 13 12 13Z" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
               <path d="M19 13C19.5523 13 20 12.5523 20 12C20 11.4477 19.5523 11 19 11C18.4477 11 18 11.4477 18 12C18 12.5523 18.4477 13 19 13Z" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
               <path d="M5 13C5.55228 13 6 12.5523 6 12C6 11.4477 5.55228 11 5 11C4.44772 11 4 11.4477 4 12C4 12.5523 4.44772 13 5 13Z" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
             </svg>
+            { cardPanel && (
+              <div className="absolute right-0 top-8 bg-zinc-200 rounded-[14px] px-4 py-3 menu-panel-animation shadow-md">
+                <div className="px-3 py-2 rounded-[10px] bg-zinc-100 hover:bg-red-400 text-zinc-700 hover:text-red-800 transition duration-200" onClick={(e) => onClick(e, cardId)}>
+                  <p>Usuń</p>
+                </div>
+              </div>
+            )}
           </div>
         </div>
 

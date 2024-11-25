@@ -121,6 +121,34 @@ app.put('/tasks/:id', async (req, res) => {
   }
 })
 
+app.delete('/tasks/:id', async (req, res) => {
+  try {
+    const sessionKey = req.headers['x-session-key'];
+    if (!sessionKey) {
+      return res.status(400).json({message: 'Session key is required'});
+    }
+
+    console.log(req.params.id);
+    const itemId = req.params.id;;
+    
+    if (!itemId) {
+      return res.status(400).json({ message: 'Invalid task ID' });
+    }
+
+    const result = await Item.deleteOne({ _id: itemId });
+    if (result.deletedCount === 0) {
+      return res.status(404).json({ message: 'Task not found' });
+    }
+    
+    return res.status(200).json({message: 'Task deleted successfully'})
+
+  } catch (error) {
+    console.log(error);
+  }
+
+})
+
+
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`);
 })
