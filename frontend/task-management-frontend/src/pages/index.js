@@ -32,16 +32,16 @@ export default function Home() {
 
   return (
     <div className="bg-neutralGray-300/50 min-h-[1200px]">
-      <div className="flex w-full flex-wrap">
-        <div className="flex-grow w-8 h-8 bg-accentColor-400 rounded-bl-[28px]"/>
-        <div className="flex-grow w-8 h-8 bg-accentColor-300"/>
-        <div className="flex-grow w-8 h-8 bg-accentColor-200"/>
-        <div className="flex-grow w-8 h-8 bg-accentColor-100"/> 
-        <div className="flex-grow w-8 h-8 bg-base-100"/>
-        <div className="flex-grow w-8 h-8 bg-base-200"/>
-        <div className="flex-grow w-8 h-8 bg-base"/>
-        <div className="flex-grow w-8 h-8 bg-base-300"/>
-        <div className="flex-grow w-8 h-8 bg-base-400 rounded-br-[28px]"/>
+      <div className="flex w-full flex-wrap justify-between">
+        <div className="flex-grow h-8 bg-accentColor-400 rounded-bl-[28px]"/>
+        <div className="flex-grow h-8 bg-accentColor-300"/>
+        <div className="flex-grow h-8 bg-accentColor-200"/>
+        <div className="flex-grow h-8 bg-accentColor-100"/> 
+        <div className="flex-grow h-8 bg-base-100"/>
+        <div className="flex-grow h-8 bg-base-200"/>
+        <div className="flex-grow h-8 bg-base"/>
+        <div className="flex-grow h-8 bg-base-300"/>
+        <div className="flex-grow h-8 bg-base-400 rounded-br-[28px]"/>
       </div>
 
       <div className="flex flex-col justify-center">

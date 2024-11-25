@@ -109,7 +109,7 @@
     padding-left: 0.75rem;
 }
 
-.form-div input {
+.form-div input, select, textarea {
     background-color: white;
     border-radius: 28px;
     width: 100%;
@@ -122,17 +122,17 @@
     transition: box-shadow 0.3s ease;
 }
 
-.form-div input::placeholder {
+.form-div input::placeholder, select::placeholder, textarea::placeholder {
     color: rgba(36, 36, 36, 0.5);
 }
 
-.form-div input:focus {
+.form-div input:focus, select:focus, textarea:focus {
     box-shadow: 0 0 0 3px hsla(220, 100%, 50%, 80%);
     outline: none;
 }
 
 .form-div button {
-    width: 50%;
+    width: 100%;
     margin-top: 0.75rem;
     margin-left: auto;
     margin-right: auto;
