@@ -14,16 +14,6 @@ export default function Card({shadowClass, cardData, id, dragHandleProps, onClic
     setCardPanel(!cardPanel)
   }
 
-  function toggleMenu() {
-    const menuPanel = document.getElementById('menuPanel');
-    if (menuPanel.classList.contains('show')) {
-      menuPanel.classList.remove('show');
-      setTimeout(() => menuPanel.classList.add('hidden'), 300); // Wait for animation to finish before hiding
-    } else {
-      menuPanel.classList.remove('hidden');
-      setTimeout(() => menuPanel.classList.add('show'), 10); // Add delay to trigger the transition
-    }
-  }
 
   return (
     <div className={`bg-white rounded-[34px] w-[95%] flex flex-col justify-between ${shadowClass} transition duration-200 shadow-md mx-auto`} id={`${id}`} {...dragHandleProps}>
